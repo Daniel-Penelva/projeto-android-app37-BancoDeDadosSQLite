@@ -23,11 +23,19 @@ public class MainActivity extends AppCompatActivity {
             bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (nome VARCHAR, idade INT(3))");
 
             // Inserir dados
-            bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Daniel', 34)");
-            bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Maria', 36)");
+            //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Mariana', 18)");
+            //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Pedro', 50)");
+
+            // Consulta SQL - exemplo aplicando filtros
+            /*String consulta = "SELECT nome, idade FROM pessoas WHERE nome='Maria' AND idade=36";*/
+            /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade >= 30 OR idade = 18";*/
+            /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade IN(18, 35)";*/
+            /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade BETWEEN 18 AND 35";*/
+            /*String consulta = "SELECT nome, idade FROM pessoas WHERE nome LIKE '%Mari%' ";*/
+            String consulta = "SELECT nome, idade FROM pessoas ORDER BY nome DESC LIMIT 4";
 
             // Recuperar pessoas
-           Cursor cursor = bancoDados.rawQuery("SELECT nome, idade FROM pessoas", null);
+           Cursor cursor = bancoDados.rawQuery(consulta, null);
 
 
            // Indices na tabela
@@ -38,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
             cursor.moveToFirst();
 
             while(cursor != null){ // Verificar se há registros retornados
-               Log.i("Resultado - nome: ", cursor.getString(indiceNome));
-               Log.i("Resultado - idade: ", cursor.getString(indiceIdade));
+
+                // Captura os valores nome e idade registrados no banco de dados
+                String nome = cursor.getString(indiceNome);
+                String idade = cursor.getString(indiceIdade);
+
+                Log.i("Resultado - nome ", nome + " - idade: " + idade);
 
                // Move o cursor para a próxima posição (próximo registro) no conjunto de resultados da consulta.
                cursor.moveToNext();
