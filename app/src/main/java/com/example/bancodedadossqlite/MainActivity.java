@@ -20,13 +20,16 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase bancoDados = openOrCreateDatabase("app", MODE_PRIVATE, null);
 
             // Criar tabela
-            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
 
             // Atualizar registro da tabela
             //bancoDados.execSQL("UPDATE pessoas SET idade = 19, nome = 'Mariana Silva' WHERE nome='Mariana' ");
 
             // Deletar tabela
-            bancoDados.execSQL("DROP TABLE pessoas");
+            //bancoDados.execSQL("DROP TABLE pessoas");
+
+            // Deletar registro de pessoa
+            bancoDados.execSQL("DELETE FROM pessoas WHERE id=2");
 
             // Inserir dados
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Mariana', 18)");
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade BETWEEN 18 AND 35";*/
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE nome LIKE '%Mari%' ";*/
             /*String consulta = "SELECT nome, idade FROM pessoas ORDER BY nome DESC LIMIT 4";*/
-            String consulta = "SELECT id, nome, idade FROM pessoas";
+            String consulta = "SELECT * FROM pessoas";
 
             // Recuperar pessoas
            Cursor cursor = bancoDados.rawQuery(consulta, null);
