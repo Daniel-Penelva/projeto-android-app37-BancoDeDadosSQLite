@@ -20,11 +20,12 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase bancoDados = openOrCreateDatabase("app", MODE_PRIVATE, null);
 
             // Criar tabela
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (nome VARCHAR, idade INT(3))");
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
 
             // Inserir dados
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Mariana', 18)");
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Pedro', 50)");
+
 
             // Consulta SQL - exemplo aplicando filtros
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE nome='Maria' AND idade=36";*/
@@ -32,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade IN(18, 35)";*/
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE idade BETWEEN 18 AND 35";*/
             /*String consulta = "SELECT nome, idade FROM pessoas WHERE nome LIKE '%Mari%' ";*/
-            String consulta = "SELECT nome, idade FROM pessoas ORDER BY nome DESC LIMIT 4";
+            /*String consulta = "SELECT nome, idade FROM pessoas ORDER BY nome DESC LIMIT 4";*/
+            String consulta = "SELECT id, nome, idade FROM pessoas";
 
             // Recuperar pessoas
            Cursor cursor = bancoDados.rawQuery(consulta, null);
 
 
            // Indices na tabela
+            int indiceId = cursor.getColumnIndex("id");
             int indiceNome = cursor.getColumnIndex("nome");
             int indiceIdade = cursor.getColumnIndex("idade");
 
@@ -50,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 // Captura os valores nome e idade registrados no banco de dados
                 String nome = cursor.getString(indiceNome);
                 String idade = cursor.getString(indiceIdade);
+                String id = cursor.getString(indiceId);
 
-                Log.i("Resultado - nome ", nome + " - idade: " + idade);
+                Log.i("Resultado - id ", id + " - nome: " + nome + " - idade: " + idade );
 
                // Move o cursor para a próxima posição (próximo registro) no conjunto de resultados da consulta.
                cursor.moveToNext();
