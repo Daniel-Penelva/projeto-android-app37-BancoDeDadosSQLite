@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
             // Criar tabela
             bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
 
+            // Atualizar registro da tabela
+            bancoDados.execSQL("UPDATE pessoas SET idade = 19, nome = 'Mariana Silva' WHERE nome='Mariana' ");
+
             // Inserir dados
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Mariana', 18)");
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Pedro', 50)");
