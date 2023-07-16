@@ -20,10 +20,13 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase bancoDados = openOrCreateDatabase("app", MODE_PRIVATE, null);
 
             // Criar tabela
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
+            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
 
             // Atualizar registro da tabela
-            bancoDados.execSQL("UPDATE pessoas SET idade = 19, nome = 'Mariana Silva' WHERE nome='Mariana' ");
+            //bancoDados.execSQL("UPDATE pessoas SET idade = 19, nome = 'Mariana Silva' WHERE nome='Mariana' ");
+
+            // Deletar tabela
+            bancoDados.execSQL("DROP TABLE pessoas");
 
             // Inserir dados
             //bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Mariana', 18)");
